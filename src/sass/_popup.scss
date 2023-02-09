@@ -1,0 +1,29 @@
+
+.Popup {
+    position: fixed;
+    background: rgba(0,0,0,0.6);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .Popup-frame {
+      border-radius: 5%;
+      background-color: rgb(255, 255, 255);
+      width: 500px;
+      padding: 20px 10px;
+    }
+    .pop-group{
+      display: flex;
+      flex-direction: column;
+    }
+  
+  }
+  
+  
+ 
+ 

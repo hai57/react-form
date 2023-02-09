@@ -65,6 +65,7 @@ button {
 .container {
   width: 900px;
 }
+
 .Popup {
   position: fixed;
   background: rgba(0,0,0,0.6);
