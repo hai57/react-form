@@ -1,7 +1,15 @@
 import React from "react";
 
 const Forms = (props) => {
-  const { onHandleChange, onHandleSubmit } = props;
+  const {
+    formErrorName,
+    formErrorPhone,
+    formErrorGmail,
+    formErrorContent,
+    onHandleBlur,
+    onHandleChange,
+    onHandleSubmit,
+  } = props;
 
   return (
     <div className="row">
@@ -22,7 +30,9 @@ const Forms = (props) => {
                   className="form-control"
                   placeholder="Nhập tên "
                   onChange={onHandleChange}
+                  onBlur={onHandleBlur}
                 />
+                <span className="non-valid">{formErrorName}</span>
               </div>
               <div className="form-group">
                 <label>Phone:</label>
@@ -32,17 +42,21 @@ const Forms = (props) => {
                   className="form-control"
                   placeholder="Nhập SĐT"
                   onChange={onHandleChange}
+                  onBlur={onHandleBlur}
                 />
+                <span className="non-valid">{formErrorPhone}</span>
               </div>
               <div className="form-group">
                 <label>Gmail:</label>
                 <input
                   name="email"
-                  type="email"
+                  type="text"
                   className="form-control"
                   placeholder="Nhập Gmail"
                   onChange={onHandleChange}
+                  onBlur={onHandleBlur}
                 />
+                <span className="non-valid">{formErrorGmail}</span>
               </div>
               <div className="form-group">
                 <label>Nội dung:</label>
@@ -52,7 +66,9 @@ const Forms = (props) => {
                   className="form-control"
                   placeholder="Nhập nội dung"
                   onChange={onHandleChange}
+                  onBlur={onHandleBlur}
                 />
+                <span className="non-valid">{formErrorContent}</span>
               </div>
 
               <button type="submit">Submit</button>
