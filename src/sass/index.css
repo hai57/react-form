@@ -123,6 +123,10 @@ button {
   font-size: 1rem;
 }
 
+.container .panel-body .form-group .non-valid {
+  color: red;
+}
+
 .Popup {
   position: fixed;
   background: rgba(0, 0, 0, 0.6);
@@ -144,8 +148,8 @@ button {
 .Popup .Popup-frame {
   border-radius: 5%;
   background-color: white;
-  width: 500px;
-  padding: 20px 10px;
+  width: 450px;
+  padding: 40px 20px;
 }
 
 .Popup .pop-group {
