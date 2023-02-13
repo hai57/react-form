@@ -1,6 +1,6 @@
 import React from "react";
 
-const Modal = (props) => {
+const Popup = (props) => {
   const { email, content, onHandleClose } = props;
 
   return (
@@ -22,4 +22,4 @@ const Modal = (props) => {
     </div>
   );
 };
-export default Modal;
+export default Popup;

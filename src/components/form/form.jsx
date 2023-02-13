@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 
 // import {sortedForms} from "../context/context-form";
-import Modal from "../modal/modal";
+import Modal from "../popup/popup";
 import list from "./form-list";
 
 const Forms = (props) => {
