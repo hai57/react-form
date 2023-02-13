@@ -7,14 +7,12 @@
 }
 header {
   font-size: 1.5rem;
-  color:rgb(119, 119, 252);
+  color: rgb(119, 119, 252);
   font-weight: 700;
   text-align: center;
 }
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
   min-height: 100vh;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
@@ -35,13 +33,10 @@ input {
   border-radius: 4px;
   outline-color: rgba(176, 84, 212, 0.5);
   background-color: rgb(255, 255, 255);
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-              rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-              rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-              rgba(60, 66, 87, 0.16) 0px 0px 0px 1px, 
-              rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-              rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-              rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 textarea {
   font-size: 16px;
@@ -53,13 +48,10 @@ textarea {
   border-radius: 4px;
   outline-color: rgba(176, 84, 212, 0.5);
   background-color: rgb(255, 255, 255);
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-              rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-              rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-              rgba(60, 66, 87, 0.16) 0px 0px 0px 1px, 
-              rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-              rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-              rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
   resize: none;
 }
 button {
@@ -71,22 +63,57 @@ button {
   border: unset;
   border-radius: 4px;
   background-color: rgb(84, 105, 212);
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-              rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-              rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-              rgb(84, 105, 212) 0px 0px 0px 1px, 
-              rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-              rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-              rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(84, 105, 212) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
   color: #fff;
   font-weight: 600;
   cursor: pointer;
 }
 .container {
-  width: 900px;
+  height: 100%;
+  width: 100%;
+  .header {
+    width: 1000px;
+    position: fixed;
+    z-index: 1;
+    nav {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      ul {
+        display: flex;
+        list-style: none;
+        li {
+          padding: 20px;
+          justify-content: center;
+          align-items: center;
+          a {
+            position: relative;
+            text-transform: uppercase;
+            color: rgb(8, 29, 4);
+            font-family: "Work sans", sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+          }
+          a:hover {
+            font-weight: bold;
+            color: rgb(184, 230, 20);
+          }
+        }
+      }
+    }
+  }
+
   .panel-heading {
     box-sizing: border-box;
-    padding-top: 20px;
+    padding-top: 40px;
     padding-bottom: 18px;
     display: flex;
     -ms-flex-pack: center;
@@ -99,15 +126,16 @@ button {
     max-width: 448px;
     background: white;
     border-radius: 4px;
-    box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
-    .form-group{
+    box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px,
+      rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+    .form-group {
       display: flex;
       gap: 0.5rem;
       flex-direction: column;
       margin-top: 1rem;
       font-weight: 500;
       font-size: 1rem;
-      .non-valid{
+      .non-valid {
         color: red;
       }
     }

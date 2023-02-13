@@ -1,84 +1,42 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 
-import Forms from "./components/Forms/form";
-import Modal from "./components/Modal/modal";
+import HomePage from "./pages/home";
+import ContactPage from "./pages/contact";
+import NewPage from "./pages/new";
+import ProductPage from "./pages/product";
+import FormContextProvider from "./components/context/context-form";
+import { v4 as uuidv4 } from "uuid";
 import "./sass/index.css";
 
 const App = () => {
-  const [forms, setForms] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    content: "",
-  });
-
-  const [formError, setFormError] = useState({});
-
-  const [modal, setModal] = useState(false);
-
-  const onHandleChange = (e) => {
-    const { name, value } = e.target;
-    setForms((prev) => {
-      return { ...prev, [name]: value };
-    });
-    setForms({ ...forms, [e.target.name]: e.target.value });
-  };
-
-  const onHandleBlur = () => {
-    let err = {};
-
-    if (forms.name === "") {
-      err.name = "Tên không được để trống";
-    }
-    if (forms.phone === "") {
-      err.phone = "SĐT không được để trống";
-    }
-    if (forms.email === "") {
-      err.email = "Gmail không được để trống";
-    } else {
-      let regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-      if (!regex.test(forms.email)) {
-        err.email = "Email không đúng định dạng";
-      }
-    }
-    if (forms.content === "" || forms.content.length > 50) {
-      err.content = "Nội dung không được để trống và không được quá 50 kí tự";
-    }
-    setFormError({ ...err });
-    return Object.keys(err).length < 1;
-  };
-
-  const onHandleSubmit = (e) => {
-    e.preventDefault();
-    let isValid = onHandleBlur();
-    if (isValid) {
-      setModal(true);
-    }
-  };
-
-  const onHandleClose = (e) => {
-    setModal(false);
-  };
-
   return (
     <div className="container">
-      <Forms
-        onHandleChange={onHandleChange}
-        onHandleSubmit={onHandleSubmit}
-        onHandleBlur={onHandleBlur}
-        name={forms.name}
-        formErrorName={formError.name}
-        formErrorPhone={formError.phone}
-        formErrorGmail={formError.email}
-        formErrorContent={formError.content}
-      />
-      {modal && (
-        <Modal
-          onHandleClose={onHandleClose}
-          email={forms.email}
-          content={forms.content}
-        />
-      )}
+      <div className="header">
+        <nav>
+          <ul>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/new">New</a>
+            </li>
+            <li>
+              <a href="/product">Product</a>
+            </li>
+            <li>
+              <a href="/contact">Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/new" element={<NewPage />} />
+        <Route path="/product" element={<ProductPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Routes>
     </div>
   );
 };
