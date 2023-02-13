@@ -17,6 +17,7 @@ const Modal = (props) => {
           <label>Nội dung:</label>
           <textarea className="txtarea-pop" value={content}></textarea>
         </div>
+
         <button onClick={onHandleClose}> Close</button>
       </div>
     </div>
