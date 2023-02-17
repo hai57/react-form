@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 // import {sortedForms} from "../context/context-form";
 import Modal from "../popup/popup";
-import list from "./form-list";
 
 const Forms = (props) => {
   // const {
@@ -16,8 +16,6 @@ const Forms = (props) => {
   // } = props;
   // const {sortedForms} = useContext(EmployeeContext);
 
-  const [list, setList] = useState();
-
   const [modal, setModal] = useState(false);
 
   const [forms, setForms] = useState({
@@ -27,10 +25,27 @@ const Forms = (props) => {
     content: "",
   });
 
+  const [form, setForm] = useState([]);
+
+  const [list, setList] = useState(false);
+
   const [formError, setFormError] = useState({});
 
   const onHandleChange = (e) => {
     setForms({ ...forms, [e.target.name]: e.target.value });
+  };
+
+  const addForm = () => {
+    setForm([
+      ...form,
+      {
+        id: uuidv4(),
+        name: forms.name,
+        phone: forms.phone,
+        mail: forms.email,
+        content: forms.content,
+      },
+    ]);
   };
 
   const onBlurError = (name) => {
@@ -95,10 +110,10 @@ const Forms = (props) => {
     let isValid = onHandleSubmitError();
     if (isValid) {
       setModal(true);
+      setList(true);
     }
   };
 
-  // const formsList = forms.map((form) => <li>{form.name}</li>);
   const onHandleClose = (e) => {
     setModal(false);
   };
@@ -162,7 +177,9 @@ const Forms = (props) => {
                 <span className="non-valid">{formError.content}</span>
               </div>
 
-              <button type="submit">Submit</button>
+              <button onClick={addForm} type="submit">
+                Submit
+              </button>
             </form>
           </div>
         </div>
@@ -173,6 +190,20 @@ const Forms = (props) => {
           email={forms.email}
           content={forms.content}
         />
+      )}
+      {list && (
+        <div className="list_form">
+          <ul>
+            {form.map((item) => (
+              <div className="list-item">
+                <li key={item.id}>{item.name}</li>
+                <li key={item.id}>{item.phone}</li>
+                <li key={item.id}>{item.mail}</li>
+                <li key={item.id}>{item.content}</li>
+              </div>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

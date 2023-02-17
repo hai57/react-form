@@ -73,15 +73,46 @@ button {
   cursor: pointer;
 }
 
+.list_form {
+  padding: 28px;
+  margin: 20px auto;
+  width: 100%;
+  background: white;
+  border-radius: 4px;
+  -webkit-box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+          box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+}
+
+.list_form ul {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+}
+
+.list_form ul li {
+  padding: 20px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .container {
   height: 100%;
   width: 100%;
 }
 
 .container .header {
-  width: 1000px;
+  width: 100%;
   position: fixed;
-  z-index: 1;
+  z-index: 0;
 }
 
 .container .header nav {
@@ -123,13 +154,12 @@ button {
 
 .container .header nav ul li a:hover {
   font-weight: bold;
-  color: #b8e614;
 }
 
 .container .panel-heading {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  padding-top: 40px;
+  padding-top: 50px;
   padding-bottom: 18px;
   display: -webkit-box;
   display: -ms-flexbox;
