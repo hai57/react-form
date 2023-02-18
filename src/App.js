@@ -1,11 +1,10 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import HomePage from "./pages/home";
 import ContactPage from "./pages/contact";
 import NewPage from "./pages/new";
 import ProductPage from "./pages/product";
-import FormContextProvider from "./components/context/context-form";
 import { v4 as uuidv4 } from "uuid";
 import "./sass/index.css";
 
