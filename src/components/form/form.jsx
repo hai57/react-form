@@ -1,33 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-// import {sortedForms} from "../context/context-form";
-import Modal from "../popup/popup";
+import FormList from "./form-list";
 
-const Forms = (props) => {
-  // const {
-  //   formErrorName,
-  //   formErrorPhone,
-  //   formErrorGmail,
-  //   formErrorContent,
-  //   onHandleSubmitError,
-  //   onHandleChange,
-  //   onHandleSubmit,
-  // } = props;
-  // const {sortedForms} = useContext(EmployeeContext);
-
-  const [modal, setModal] = useState(false);
-
+const Forms = () => {
   const [forms, setForms] = useState({
-    name: "",
+    fullName: "",
     phone: "",
     email: "",
     content: "",
   });
 
-  const [form, setForm] = useState([]);
-
-  const [list, setList] = useState(false);
+  const [list, setList] = useState([]);
 
   const [formError, setFormError] = useState({});
 
@@ -35,88 +19,78 @@ const Forms = (props) => {
     setForms({ ...forms, [e.target.name]: e.target.value });
   };
 
-  const addForm = () => {
-    setForm([
-      ...form,
+  const addFormToList = () => {
+    setList([
+      ...list,
       {
         id: uuidv4(),
-        name: forms.name,
+        fullName: forms.fullName,
         phone: forms.phone,
         mail: forms.email,
         content: forms.content,
       },
     ]);
   };
-
-  const onBlurError = (name) => {
-    let err = { ...formError };
-    switch (name) {
-      case "name":
-        err.name = forms.name == "" ? "Tên không được để trống" : "";
-        break;
-      case "phone":
-        err.phone = forms.phone == "" ? "SĐT không được để trống" : "";
-        break;
-      case "email":
-        if (forms.email === "") {
-          err.email = "Gmail không được để trống";
-        } else {
-          let regex = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g;
-          if (!regex.test(forms.email)) {
-            err.email = "Gmail không đúng định dạng";
-          } else {
-            err.email = "";
-          }
-        }
-        break;
-      case "content":
-        err.content =
-          forms.content == ""
-            ? "Nội dung không được để trống và không được quá 50 kí tự"
-            : "";
-        break;
-      default:
-        break;
-    }
-    setFormError(err);
-    return Object.keys(err).length < 1;
-  };
-
+  const formInput = [
+    {
+      name: "fullName",
+      label: "Name:",
+      placeholder: "Nhập Tên:",
+      errName: formError.fullName,
+    },
+    {
+      name: "phone",
+      label: "Phone:",
+      placeholder: "Nhập SDT :",
+      errName: formError.phone,
+    },
+    {
+      name: "email",
+      label: "Gmail:",
+      placeholder: "Nhập Gmail:",
+      errName: formError.email,
+    },
+  ];
   const onHandleSubmitError = () => {
-    let err = {};
-
-    if (forms.name === "") {
-      err.name = "Tên không được để trống";
+    let err = { ...formError };
+    let regex = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    if (forms.fullName === "") {
+      err.fullName = "Tên không được để trống";
+    } else {
+      delete err.fullName;
     }
     if (forms.phone === "") {
       err.phone = "SĐT không được để trống";
+    } else {
+      delete err.phone;
     }
     if (forms.email === "") {
       err.email = "Gmail không được để trống";
+    } else if (!regex.test(forms.email)) {
+      err.email = "Email không đúng định dạng";
     } else {
-      let regex = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g;
-      if (!regex.test(forms.email)) {
-        err.email = "Email không đúng định dạng";
-      }
+      delete err.email;
     }
     if (forms.content === "" || forms.content.length > 50) {
       err.content = "Nội dung không được để trống và không được quá 50 kí tự";
+    } else {
+      delete err.content;
     }
     setFormError(err);
-    return Object.keys(err).length < 1;
+    return Object.keys(err).length === 0;
   };
+
   const onHandleSubmit = (e) => {
     e.preventDefault();
     let isValid = onHandleSubmitError();
     if (isValid) {
-      setModal(true);
-      setList(true);
+      addFormToList();
     }
+
+    console.log(isValid);
+    console.log(list);
   };
 
-  const onHandleClose = (e) => {
-    setModal(false);
-  };
   return (
     <div className="row">
       <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8">
@@ -128,42 +102,21 @@ const Forms = (props) => {
           <div className="panel-body">
             <h3>Fill the Form</h3>
             <form onSubmit={onHandleSubmit}>
-              <div className="form-group">
-                <label>Name:</label>
-                <input
-                  name="name"
-                  type="text"
-                  className="form-control"
-                  placeholder="Nhập tên "
-                  onChange={onHandleChange}
-                  onBlur={() => onBlurError("name")}
-                />
-                <span className="non-valid">{formError.name}</span>
-              </div>
-              <div className="form-group">
-                <label>Phone:</label>
-                <input
-                  name="phone"
-                  type="text"
-                  className="form-control"
-                  placeholder="Nhập SĐT"
-                  onChange={onHandleChange}
-                  onBlur={() => onBlurError("phone")}
-                />
-                <span className="non-valid">{formError.phone}</span>
-              </div>
-              <div className="form-group">
-                <label>Gmail:</label>
-                <input
-                  name="email"
-                  type="text"
-                  className="form-control"
-                  placeholder="Nhập Gmail"
-                  onChange={onHandleChange}
-                  onBlur={() => onBlurError("email")}
-                />
-                <span className="non-valid">{formError.email}</span>
-              </div>
+              {formInput.map((item, index) => {
+                return (
+                  <div key={index} className="form-group">
+                    <label>{item.label}</label>
+                    <input
+                      name={item.name}
+                      type="text"
+                      className="form-control"
+                      placeholder={item.placeholder}
+                      onChange={onHandleChange}
+                    />
+                    <span className="non-valid">{item.errName}</span>
+                  </div>
+                );
+              })}
               <div className="form-group">
                 <label>Nội dung:</label>
                 <textarea
@@ -172,37 +125,19 @@ const Forms = (props) => {
                   className="form-control"
                   placeholder="Nhập nội dung"
                   onChange={onHandleChange}
-                  onBlur={() => onBlurError("content")}
                 />
                 <span className="non-valid">{formError.content}</span>
               </div>
 
-              <button onClick={addForm} type="submit">
-                Submit
-              </button>
+              <button type="submit">Submit</button>
             </form>
           </div>
         </div>
       </div>
-      {modal && (
-        <Modal
-          onHandleClose={onHandleClose}
-          email={forms.email}
-          content={forms.content}
-        />
-      )}
-      {list && (
+
+      {list.length > 0 && (
         <div className="list_form">
-          <ul>
-            {form.map((item) => (
-              <div className="list-item">
-                <li key={item.id}>{item.name}</li>
-                <li key={item.id}>{item.phone}</li>
-                <li key={item.id}>{item.mail}</li>
-                <li key={item.id}>{item.content}</li>
-              </div>
-            ))}
-          </ul>
+          <FormList list={list} />
         </div>
       )}
     </div>
