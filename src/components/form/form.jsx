@@ -117,6 +117,39 @@ const Forms = () => {
                   </div>
                 );
               })}
+              {/* <div className="form-group">
+                <label>Nhập Tên:</label>
+                <input
+                  name="fullName"
+                  type="text"
+                  className="form-control"
+                  placeholder="Nhập Tên:"
+                  onChange={onHandleChange}
+                />
+                <span className="non-valid">{formError.fullName}</span>
+              </div>
+              <div className="form-group">
+                <label>Phone:</label>
+                <input
+                  name="phone"
+                  type="text"
+                  className="form-control"
+                  placeholder="Nhập SĐT"
+                  onChange={onHandleChange}
+                />
+                <span className="non-valid">{formError.phone}</span>
+              </div>
+              <div className="form-group">
+                <label>Gmail:</label>
+                <input
+                  name="email"
+                  type="text"
+                  className="form-control"
+                  placeholder="Nhập Gmail"
+                  onChange={onHandleChange}
+                />
+                <span className="non-valid">{formError.email}</span>
+              </div> */}
               <div className="form-group">
                 <label>Nội dung:</label>
                 <textarea
@@ -144,3 +177,40 @@ const Forms = () => {
   );
 };
 export default Forms;
+// const onBlurError = (name) => {
+//   let err = { ...formError };
+//   switch (name) {
+//     case "name":
+//       err.name = forms.name === "" ? "Tên không được để trống" : "";
+//       break;
+//     case "phone":
+//       err.phone = forms.phone === "" ? "SĐT không được để trống" : "";
+//       break;
+//     case "email":
+//       if (forms.email === "") {
+//         err.email = "Gmail không được để trống";
+//       } else {
+//         let regex = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g;
+//         if (!regex.test(forms.email)) {
+//           err.email = "Gmail không đúng định dạng";
+//         } else {
+//           err.email = "";
+//         }
+//       }
+//       break;
+//     case "content":
+//       err.content =
+//         forms.content === ""
+//           ? "Nội dung không được để trống và không được quá 50 kí tự"
+//           : "";
+//       break;
+//     default:
+//       break;
+//   }
+//   setFormError(err);
+//   return Object.keys(err).length < 1;
+// };
+
+// const onHandleClose = (e) => {
+//   setModal(false);
+// };

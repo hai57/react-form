@@ -6,6 +6,7 @@ import ContactPage from "./pages/contact";
 import NewPage from "./pages/new";
 import ProductPage from "./pages/product";
 import { v4 as uuidv4 } from "uuid";
+// import "./sass/index.css";
 import "./sass/index.css";
 
 const App = () => {
